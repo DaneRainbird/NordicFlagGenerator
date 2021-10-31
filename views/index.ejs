@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<head>
+    <title>Random Nordic Flag | Home</title>
+    <link rel="stylesheet" src="css/main.css">
+</head>
+<body>
+    <h1>Test Page</h1>
+    <hr />
+    <canvas id="test"></canvas>
+
+    <script>
+
+        // Get Canvas Element 
+        var canvas = document.getElementById('test');
+        var ctx = canvas.getContext('2d');
+    
+        // Draw top-left corner rectangle
+        ctx.fillStyle = '<%= colours[0] %>';
+        ctx.fillRect(0, 0, 60, 60);
+    
+        // Draw bottom-left corner rectangle
+        ctx.fillStyle = '<%= colours[0] %>';
+        ctx.fillRect(0, 100, 60, 60);
+    
+        // Draw top-right corner rectangle
+        ctx.fillStyle = '<%= colours[0] %>';
+        ctx.fillRect(100, 0, 100, 60);
+    
+        // Draw bottom-right corner rectangle
+        ctx.fillStyle = '<%= colours[0] %>';
+        ctx.fillRect(100, 100, 100, 60);
+    
+        // Draw vertical line
+        ctx.fillStyle = '<%= colours[1] %>';
+        ctx.fillRect(70, 0, 20, 150);
+    
+        // Draw horizontal line
+        ctx.fillStyle = '<%= colours[1] %>';
+        ctx.fillRect(0, 70, 200, 20);
+    
+    </script>
+</body>

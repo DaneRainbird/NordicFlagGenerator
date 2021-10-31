@@ -6,6 +6,8 @@
 
  /** DEPENDENCIES **/
 let express = require('express');
+let random = require('random');
+let seedRandom = require('seedrandom')
 
 /** EXPRESS CONFIGURATION **/
 let app = express();
@@ -22,6 +24,19 @@ app.use(express.static(__dirname + '/res'));
 app.listen(port, () => console.log("Listening on port " + port))
 
 /** ROUTING **/
-app.get('/', (req, res) => {
-    res.render("index.html");
+app.get('/:seed?', (req, res) => {
+    let seed = req.query.seed;
+
+    // If a seed has been provided, then use it
+    if (seed != undefined && seed != "") {
+        console.log("Seeding with " + seed);
+        random.use(seedRandom(seed));
+    }
+
+    // Generate two random hex values
+    let colour1 = random.int(0, 16777215).toString(16);
+    let colour2 = random.int(0, 16777215).toString(16);
+
+    // Render the index page with colours
+    res.render("index.ejs", {'colours' : ["#" + colour1,  "#" + colour2]});
 })
