@@ -1,7 +1,7 @@
 {
   "name": "proceduralnordicflaggenerator",
   "version": "1.0.0",
-  "description": "A Procedural Nordic Flag Generator build in JS",
+  "description": "A Procedural Nordic Flag Generator built in JS",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
