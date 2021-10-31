@@ -1,0 +1,19 @@
+{
+  "name": "proceduralnordicflaggenerator",
+  "version": "1.0.0",
+  "description": "A Procedural Nordic Flag Generator build in JS",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Datenyan/ProceduralNordicFlagGenerator.git"
+  },
+  "author": "Dane Rainbird",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Datenyan/ProceduralNordicFlagGenerator/issues"
+  },
+  "homepage": "https://github.com/Datenyan/ProceduralNordicFlagGenerator#readme"
+}
