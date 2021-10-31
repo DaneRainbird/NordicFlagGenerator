@@ -34,24 +34,36 @@ app.get('/:seed?', (req, res) => {
     // Get the seed from the request
     let seed = req.query.seed;
 
+    // Set up checks for the heart easter egg
+    let heartEasterEggNames = ['kim', 'kimberley', 'glitch', 'kaitlyn'];
+    let heartEasterEggEnabled = false;
 
     // If a seed has been provided, then use it
     if (seed != undefined && seed != "") {
         random.use(seedRandom(seed));
+        
+        // Check if the seed matches the heart easter egg names 
+        if (heartEasterEggNames.includes(seed.toLowerCase())) {
+            heartEasterEggEnabled = true;
+        }
     }
 
-    // Generate two random hex values
+    // Generate two random hex values to use as colours
     let colour1 = random.int(0, 16777215).toString(16);
     let colour2 = random.int(0, 16777215).toString(16);
 
     // Generate a country name using the Markov Generator
     let countryName = markov.Chain(markov.formInput(...countryNames), 0.3, 4, 10, random.float())
-    if (true) {
-        countryName = countryName.toLowerCase().split(' ').map(w => {
-            return w.replace(w[0], w[0].toUpperCase());
-        }).join(' ');
-    }
     
+    // Set the first character of countryName to be upper case
+    countryName = countryName = countryName.charAt(0).toUpperCase() + countryName.slice(1);
+
     // Render the index page with colours and country name 
-    res.render("index.ejs", {'colours' : ["#" + colour1,  "#" + colour2], 'countryName' : countryName});
+    res.render("index.ejs", {
+        'colours' : [
+            "#" + colour1,  
+            "#" + colour2
+        ], 
+        'countryName' : countryName, 
+        'heartEasterEggEnabled' : heartEasterEggEnabled});
 })

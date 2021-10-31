@@ -1,44 +1,105 @@
 <!DOCTYPE html>
+
 <head>
     <title>Random Nordic Flag | Home</title>
     <link rel="stylesheet" src="css/main.css">
 </head>
+
 <body>
     <h1>Test Page</h1>
     <hr />
     <canvas id="test"></canvas>
     <br />
-    <p><%= countryName %></p>
+    <p>
+        <%= countryName %>
+    </p>
 
     <script>
 
-        // Get Canvas Element 
-        var canvas = document.getElementById('test');
-        var ctx = canvas.getContext('2d');
-    
-        // Draw top-left corner rectangle
-        ctx.fillStyle = '<%= colours[0] %>';
-        ctx.fillRect(0, 0, 60, 60);
-    
-        // Draw bottom-left corner rectangle
-        ctx.fillStyle = '<%= colours[0] %>';
-        ctx.fillRect(0, 100, 60, 60);
-    
-        // Draw top-right corner rectangle
-        ctx.fillStyle = '<%= colours[0] %>';
-        ctx.fillRect(100, 0, 100, 60);
-    
-        // Draw bottom-right corner rectangle
-        ctx.fillStyle = '<%= colours[0] %>';
-        ctx.fillRect(100, 100, 100, 60);
-    
-        // Draw vertical line
-        ctx.fillStyle = '<%= colours[1] %>';
-        ctx.fillRect(70, 0, 20, 150);
-    
-        // Draw horizontal line
-        ctx.fillStyle = '<%= colours[1] %>';
-        ctx.fillRect(0, 70, 200, 20);
-    
+        // On body load, draw the flag onto the canvas
+        window.onload = () => {
+            // Get Canvas Element 
+            var canvas = document.getElementById('test');
+            var ctx = canvas.getContext('2d');
+
+            // Draw top-left corner rectangle
+            ctx.fillStyle = '<%= colours[0] %>';
+            ctx.fillRect(0, 0, 60, 60);
+
+            // Draw bottom-left corner rectangle
+            ctx.fillStyle = '<%= colours[0] %>';
+            ctx.fillRect(0, 100, 60, 60);
+
+            // Draw top-right corner rectangle
+            ctx.fillStyle = '<%= colours[0] %>';
+            ctx.fillRect(100, 0, 100, 60);
+
+            // Draw bottom-right corner rectangle
+            ctx.fillStyle = '<%= colours[0] %>';
+            ctx.fillRect(100, 100, 100, 60);
+
+            // Draw vertical line
+            ctx.fillStyle = '<%= colours[1] %>';
+            ctx.fillRect(70, 0, 20, 150);
+
+            // Draw horizontal line
+            ctx.fillStyle = '<%= colours[1] %>';
+            ctx.fillRect(0, 70, 200, 20);
+
+            <% if (heartEasterEggEnabled) { %>
+                // Draw a heart
+                console.log("easter egg");
+                x = 79;
+                y = 70;
+
+                drawHeart(ctx, x, y, x + 50, y + 50, 20, 20, 'red');
+            <% } %>
+        }
+
+        // Draw a heart on specific names, or when easterEgg is enabled
+        function drawHeart(ctx, fromx, fromy, tox, toy, lw, hlen, color) {
+            var x = fromx;
+            var y = fromy;
+            var width = lw ;
+            var height = hlen;
+
+            ctx.save();
+            ctx.beginPath();
+            var topCurveHeight = height * 0.3;
+            ctx.moveTo(x, y + topCurveHeight);
+            // top left curve
+            ctx.bezierCurveTo(
+            x, y, 
+            x - width / 2, y, 
+            x - width / 2, y + topCurveHeight
+            );
+
+            // bottom left curve
+            ctx.bezierCurveTo(
+            x - width / 2, y + (height + topCurveHeight) / 2, 
+            x, y + (height + topCurveHeight) / 2, 
+            x, y + height
+            );
+
+            // bottom right curve
+            ctx.bezierCurveTo(
+            x, y + (height + topCurveHeight) / 2, 
+            x + width / 2, y + (height + topCurveHeight) / 2, 
+            x + width / 2, y + topCurveHeight
+            );
+
+            // top right curve
+            ctx.bezierCurveTo(
+            x + width / 2, y, 
+            x, y, 
+            x, y + topCurveHeight
+            );
+
+            ctx.closePath();
+            ctx.fillStyle = color;
+            ctx.fill();
+            ctx.restore();
+        }
+
     </script>
 </body>
