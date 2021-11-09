@@ -10,6 +10,7 @@ let random = require('random');
 let seedRandom = require('seedrandom');
 let fs = require('fs');
 let markov = require('./helpers/markov_chain');
+require('dotenv').config();
 
 /** APP CONFIGURATION **/
 let app = express();
@@ -66,5 +67,6 @@ app.get('/:seed?', (req, res) => {
         ], 
         'countryName' : countryName, 
         'heartEasterEggEnabled' : heartEasterEggEnabled,
-        'seed' : seed});
+        'seed' : seed
+    });
 })
