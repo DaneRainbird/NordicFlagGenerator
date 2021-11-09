@@ -21,14 +21,13 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
 /** STATIC ROUTING CONFIGURATION **/
-app.use(express.static(__dirname + '/res'));
+app.use(express.static('res'));
 
 /** RUN THE SERVER **/
 app.listen(port, () => console.log("Listening on port " + port))
 
 // Obtain the country list for use in the Markov chain 
-//const countryTrainingText = fs.readFileSync(__dirname + '/res/countries.txt', 'utf8');
-const countryTrainingText = "Test1\r\nTest2";
+const countryTrainingText = fs.readFileSync(__dirname + '/res/countries.txt', 'utf8');
 const countryNames = countryTrainingText.split('\r\n');
 
 /** ROUTING **/
