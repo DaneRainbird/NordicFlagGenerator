@@ -65,5 +65,6 @@ app.get('/:seed?', (req, res) => {
             "#" + colour2
         ], 
         'countryName' : countryName, 
-        'heartEasterEggEnabled' : heartEasterEggEnabled});
+        'heartEasterEggEnabled' : heartEasterEggEnabled,
+        'seed' : seed});
 })

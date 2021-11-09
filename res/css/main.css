@@ -1,3 +1,11 @@
+/* Custom Font Face for Country Name */
+@font-face {
+    font-family: 'Luminari';
+    font-style: normal;
+    font-weight: normal;
+    src: local('../fonts/Luminari'), url('../fonts/Luminari-Regular.woff') format('woff');
+}
+
 html, body {
     margin: 0;
     padding: 0;
@@ -19,7 +27,8 @@ header {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: white;
     font-weight: 500;
-    box-shadow: 0px 0px 10px black
+    box-shadow: 0px 0px 10px black;
+    z-index: 1;
 }
 
 .navbar {
@@ -96,6 +105,7 @@ header {
     flex-grow: 1;
     justify-content: center;
     background-color: whitesmoke;
+    align-items: center;
 }
 
 .content {
@@ -104,17 +114,95 @@ header {
     border-radius: 10px;
     box-shadow: 0px 0px 10px gray;
     width: 60%;
+    height: 75%;
     background-color: #E0E0E0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
-.content h1 {
-    font-size: 2em;
-    font-weight: 700;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.canvas_container {
+    padding-top: 1em;
+    display: flex;
     justify-content: center;
+    width: 65%;
+    height: 35%;
+}
+
+canvas {
+    box-shadow: 0px 0px 10px black;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+}
+
+.details p {
+    align-self: center;
+}
+
+.country_name {
+    font-size: 2.5em;
+    font-family: 'Luminari', Tahoma, Geneva, Verdana, sans-serif;
+    font-style: italic;
     border-bottom: 1px solid black;
-    line-height: 66px;
+    margin-bottom: 0;
+}
+
+.seed {
+    font-family: 'Consolas', serif;
+    color: gray;
+    font-style: italic;
+}
+
+.splash-text {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.generate_button {
+    color: #ffffff;
+    background-color: #6f2a9c;
+    font-size: 19px;
+    border: 1px solid #6f2a9c;
+    border-radius: 15px;
+    padding: 15px 50px;
+    cursor: pointer;
+    text-decoration: none;
+    /* Prevent blue outline on click */
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.generate_button:hover {
+    color: #ffffff;
+    background-color: #5e2484;
+}
+
+.generate_button:active {
+    color: #ffffff;
+    background-color: #5e2484;
+    outline: none;
+    position: relative;
+	top: 1px;
+}
+
+.generate_button:focus {
+    outline: none !important;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.buttons button {
+    margin: 0.1em;
 }

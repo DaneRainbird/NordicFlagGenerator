@@ -34,12 +34,24 @@
     <!-- Begin Main Content -->
     <div class="container">
         <div class="content">
-            <h1>Your Random Nordic Flag</h1>
-            <canvas id="flag_canvas" height="300px" width="450px"></canvas>
-            <br />
-            <p>
-                <%= countryName %>
-            </p>
+            <!-- Canvas Container  -->
+            <div class="canvas_container">
+                <canvas id="flag_canvas" width="450px" height="300px">Your browser does not support canvas :(</canvas>
+            </div>
+            <!-- End Canvas Container -->
+            <div class="details">
+                <p class="country_name">
+                    "<%= countryName %>"
+                </p>
+                <% if (seed) { %>
+                    <p class="seed">(Seeded with: "<%= seed %>")</p>
+                <% } %>
+                <p class="splash-text">An honorable nation indeed...</p>
+            </div>
+            <div class="buttons">
+                <button class="generate_button" type="button" onclick="newFlag();">Generate a random flag?</button>
+                <button class="generate_button" type="button" onclick="newFlagWithSeed();">Use a seed?</button>
+            </div>
         </div>
     </div>
     <!-- End Main Content -->
@@ -54,39 +66,54 @@
     <script>
         // On body load, draw the flag onto the canvas
         window.onload = () => {
+            drawFlag();
+        }
+
+        // Draw the flag onto the canvas
+        function drawFlag() {
             // Get Canvas Element 
-            var canvas = document.getElementById('flag_canvas');
-            var ctx = canvas.getContext('2d');
+            let canvas = document.getElementById('flag_canvas');
+            let parent = document.getElementsByClassName('canvas_container')[0];
+            let ctx = canvas.getContext('2d');
+
+            // Get the height and width of the canvas
+            let width = parent.clientWidth;
+            let height = parent.clientHeight;
+
+            // Set the initial canvas size
+            canvas.width = parent.clientWidth;
+            canvas.style.width = parent.clientWidth;
+            canvas.height = parent.clientHeight;
+            canvas.style.height = parent.clientHeight;
 
             // Draw top-left corner rectangle
             ctx.fillStyle = '<%= colours[0] %>';
-            ctx.fillRect(50, 0, 60, 60);
+            ctx.fillRect(0, 0, 60, height / 2 - 10);
 
             // Draw bottom-left corner rectangle
             ctx.fillStyle = '<%= colours[0] %>';
-            ctx.fillRect(50, 100, 60, 60);
+            ctx.fillRect(0, height / 2 + 30, 60, height);
 
             // Draw top-right corner rectangle
             ctx.fillStyle = '<%= colours[0] %>';
-            ctx.fillRect(150, 0, 100, 60);
+            ctx.fillRect(100, 0, width, height / 2 - 10);
 
             // Draw bottom-right corner rectangle
             ctx.fillStyle = '<%= colours[0] %>';
-            ctx.fillRect(150, 100, 100, 60);
+            ctx.fillRect(100, height / 2 + 30, width, height);
 
             // Draw vertical line
             ctx.fillStyle = '<%= colours[1] %>';
-            ctx.fillRect(120, 0, 20, 150);
+            ctx.fillRect(70, 0, 20, height);
 
             // Draw horizontal line
             ctx.fillStyle = '<%= colours[1] %>';
-            ctx.fillRect(50, 70, 200, 20);
+            ctx.fillRect(0, height / 2, width, 20);
 
             <% if (heartEasterEggEnabled) { %>
                 // Draw a heart
-                console.log("easter egg");
                 x = 79;
-                y = 70;
+                y = height / 2;
 
                 drawHeart(ctx, x, y, x + 50, y + 50, 20, 20, 'red');
             <% } %>
@@ -135,6 +162,33 @@
             ctx.fillStyle = color;
             ctx.fill();
             ctx.restore();
+        }
+        
+        // Resize on window resize (n.b. for this page's purposes, this is not a WebGL anti-pattern. Read more here: https://webglfundamentals.org/webgl/lessons/webgl-anti-patterns.html)
+        window.onresize = function() {
+            let canvas = document.getElementById('flag_canvas');
+            let parent = document.getElementsByClassName('canvas_container')[0];
+            canvas.width = parent.clientWidth;
+            canvas.style.width = parent.clientWidth;
+            canvas.height = parent.clientHeight;
+            canvas.style.height = parent.clientHeight;
+            drawFlag();
+        }
+    </script>
+
+    <!-- Button Prompt Script -->
+    <script>
+        // Generate a random flag
+        function newFlag() {
+            window.location.href = '/';
+        }
+
+        // Prompt the user to enter a seed
+        function newFlagWithSeed() {
+            var seed = prompt("Enter a seed to use for this flag!");
+            if (seed) {
+                window.location.href = "/?seed=" + seed;
+            }
         }
     </script>
 </body>
