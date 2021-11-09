@@ -27,11 +27,11 @@ app.use(express.static('res'));
 app.listen(port, () => console.log("Listening on port " + port))
 
 // Obtain the country list for use in the Markov chain 
-const countryTrainingText = fs.readFileSync(__dirname + '/res/countries.txt', 'utf8');
+const countryTrainingText = fs.readFileSync('./res/countries.txt', 'utf8');
 const countryNames = countryTrainingText.split('\r\n');
 
 /** ROUTING **/
-app.get('/:seed?', (req, res) => {
+app.get('/', (req, res) => {
     // Get the seed from the request
     let seed = req.query.seed;
 
