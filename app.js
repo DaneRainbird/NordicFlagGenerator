@@ -23,11 +23,11 @@ app.set('view engine', 'html');
 /** STATIC ROUTING CONFIGURATION **/
 app.use(express.static(__dirname + '/res'));
 
-/** RUN THE SERVER s**/
+/** RUN THE SERVER **/
 app.listen(port, () => console.log("Listening on port " + port))
 
 // Obtain the country list for use in the Markov chain 
-const countryTrainingText = fs.readFileSync(__dirname + '/res/countries.txt', 'utf8');
+//const countryTrainingText = fs.readFileSync(__dirname + '/res/countries.txt', 'utf8');
 const countryNames = countryTrainingText.split('\r\n');
 
 /** ROUTING **/
