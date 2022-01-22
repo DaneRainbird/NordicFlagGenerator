@@ -26,11 +26,15 @@ app.use(express.static('res'));
 /** RUN THE SERVER **/
 app.listen(port, () => console.log("Listening on port " + port))
 
-// Obtain the country list for use in the Markov chain 
+/** GET NAME / COUNTRY DATA FROM FILE */
 const countryTrainingText = fs.readFileSync('./res/countries.txt', 'utf8');
 const countryNames = countryTrainingText.split('\r\n');
 
-/** ROUTING **/
+/**====================================================== 
+ *                    BEGIN ROUTING
+ ====================================================== */
+
+// GET - Homepage
 app.get('/', (req, res) => {
     // Get the seed from the request
     let seed = req.query.seed;
@@ -61,6 +65,7 @@ app.get('/', (req, res) => {
 
     // Render the index page with colours and country name 
     res.render("index.ejs", {
+        'pageTitle': 'Home',
         'colours' : [
             "#" + colour1,  
             "#" + colour2
@@ -70,3 +75,14 @@ app.get('/', (req, res) => {
         'seed' : seed
     });
 })
+
+// GET - About Page
+app.get('/about', (req, res) => {
+    res.render('about.ejs', {
+        'pageTitle': 'About'
+    })
+})
+
+/**====================================================== 
+ *                    END ROUTING
+ ====================================================== */
