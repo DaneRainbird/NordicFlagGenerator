@@ -23,12 +23,20 @@ app.set('view engine', 'html');
 /** STATIC ROUTING CONFIGURATION **/
 app.use(express.static('res'));
 
-/** RUN THE SERVER **/
-app.listen(port, () => console.log("Listening on port " + port))
-
 /** GET NAME / COUNTRY DATA FROM FILE */
-const countryTrainingText = fs.readFileSync('./res/countries.txt', 'utf8');
-const countryNames = countryTrainingText.split('\r\n');
+let countryNames; 
+fs.readFile(__dirname + '/res/countries.txt', (error, data) => {
+    // If an error occurs, then log and exit
+    if (error) {
+        console.log("Error occurred loading countries.txt: " + error);
+        process.exit(1);
+    }
+    console.log("Successfully loaded countries.txt");
+    countryNames = data.toString().split('\r\n');
+
+    // if the file loads, then start the server
+    app.listen(port, () => console.log("Listening on port " + port))
+});
 
 /**====================================================== 
  *                    BEGIN ROUTING
