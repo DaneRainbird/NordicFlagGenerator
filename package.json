@@ -19,7 +19,7 @@
   "homepage": "https://github.com/Datenyan/ProceduralNordicFlagGenerator#readme",
   "dependencies": {
     "dotenv": "^10.0.0",
-    "ejs": "^3.1.6",
+    "ejs": "^3.1.8",
     "express": "^4.17.1",
     "random": "^3.0.6"
   }
