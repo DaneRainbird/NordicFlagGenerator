@@ -68,6 +68,9 @@ app.get('/', (req, res) => {
     // Generate a country name using the Markov Generator
     let countryName = markov.Chain(markov.formInput(...countryNames), 0.3, 4, 10, random.float())
     
+    // Log the country name, colour, and associated seed
+    console.log("Generated name '" + countryName + "' with seed '" + seed + "'");
+
     // Set the first character of countryName to be upper case
     countryName = countryName = countryName.charAt(0).toUpperCase() + countryName.slice(1);
 
