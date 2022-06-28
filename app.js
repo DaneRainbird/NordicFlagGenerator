@@ -23,20 +23,66 @@ app.set('view engine', 'html');
 /** STATIC ROUTING CONFIGURATION **/
 app.use(express.static('res'));
 
-/** GET NAME / COUNTRY DATA FROM FILE */
-let countryNames; 
-fs.readFile(__dirname + '/res/countries.txt', (error, data) => {
-    // If an error occurs, then log and exit
-    if (error) {
-        console.log("Error occurred loading countries.txt: " + error);
-        process.exit(1);
-    }
-    console.log("Successfully loaded countries.txt");
-    countryNames = data.toString().split('\r\n');
+/** COUNTRY DATA */
 
-    // if the file loads, then start the server
-    app.listen(port, () => console.log("Listening on port " + port))
-});
+// For whatever reason, Render and Heroku don't like it when the data is read in from another file 
+// so I'm just copying the data directly into a variable here.
+let countryNames = 
+`Denmark
+Finland
+Iceland
+Norway
+Sweden
+Faroe Islands
+Greenland
+Åland Islands
+Svalbard
+Bouvet Island
+Asgard
+Alfheim
+Amsvartnir
+Barri
+Bifröst
+Breidablik
+Byrgir
+Eljudnir
+Fensalir
+Fólkvangr
+Gimli
+Gjallarbru
+Gioll
+Gladsheim
+Glitnir
+Himinbjorg
+Hlesey
+Hlidskjalf
+Hnitborg
+Hvergelmir
+Idavoll
+Jotunheim
+Laerad
+Lyngvi
+Nastrond
+Noatun
+Midgard
+Muspelheim
+Sessrumnir
+Svartalfheim
+Thrymheim
+Urdarbrunn
+Valaskialf
+Valhalla
+Vanaheim
+Vingolf
+Valgrind
+Vimur
+Niflheim
+Helheim`;
+
+countryNames = countryNames.toString().split('\n');
+
+/** RUN THE SERVER */
+app.listen(port, () => console.log("Listening on port " + port));
 
 /**====================================================== 
  *                    BEGIN ROUTING
@@ -66,7 +112,7 @@ app.get('/', (req, res) => {
     let colour2 = random.int(0, 16777215).toString(16);
 
     // Generate a country name using the Markov Generator
-    let countryName = markov.Chain(markov.formInput(...countryNames), 0.3, 4, 10, random.float())
+    let countryName = markov.Chain(markov.formInput(...countryNames), 0.3, 4, 10, Math.random())
     
     // Log the country name, colour, and associated seed
     console.log("Generated name '" + countryName + "' with seed '" + seed + "'");
