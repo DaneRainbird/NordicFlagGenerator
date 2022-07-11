@@ -15,4 +15,4 @@ By default, this file contains a list of all real-world Nordic / Scandinavian co
 
 ## Credit
 - /u/ScratchOs on Reddit for their [JavaScript Markov Chain Implementation](https://www.reddit.com/r/proceduralgeneration/comments/7ulmts/small_markov_chain_to_generate_country_names_in/).
-- [Glitch](https://github.com/darkrilin) for the idea. Visit their [I.D.E.A.S page](https://rtay.io/ideas/) for other stuff similar to this!
+- [Glitch](https://github.com/glitchybunny) for the idea. Visit their [I.D.E.A.S page](https://rtay.io/ideas) for other stuff similar to this!
